@@ -1,0 +1,202 @@
+{
+    "success": true,
+    "message": "Successfully imported 2 products",
+    "data": [
+        {
+            "id": 8082769379500,
+            "title": "RayBan Brown Skylar",
+            "body_html": "<div class=\"x1lliihq x137v6ai\"><span class=\"x16g9bbj x17gzxuv xv6bue1 xex5isp xsp84uj x1j402mz x1wsgf3v x14imz66 xby3lk6 xcxolhg xjbavb x1npfmwo x16b4c32 x1yyhlu9 x1i6xp69 xvyeec0 x12429cg x6tc29j xbq7h4v x6jdkww xq9mrsl\">Ray-Ban Meta Skylar</span></div>\n<div class=\"ma-wd_739px xeuugli x2lwn1j x78zum5 xig2svb x18vy5xy xlluq36 xwy3nlu xpu8j0z xfzd5jt x79b4n4 x1lprzx0 x1or4hh0 x5pxerh x13fuv20 xu3j5b3 x1q0q8m5 x26u7qi x972fbf xcfux6l x1qhh985 xm0m39n\">\n<div>\n<div class=\"xeuugli x2lwn1j x78zum5 x19xhxss x6hrlo1 x1m11752 x1dn74xm x4a20bl xtatjob x79b4n4 x1lprzx0 x1or4hh0 x5pxerh x13fuv20 xu3j5b3 x1q0q8m5 x26u7qi x972fbf xcfux6l x1qhh985 xm0m39n\">\n<span class=\"xbks1sj x17gzxuv x3a6nna xm5vtmc x1t2x7uc x1o1n6r0 x1wsgf3v x1c773n9 x1k03ns3 xpbi8i2 x9820fh x1npfmwo xhj0du5 xrm2kyc xjprkx4 xlu1awn x12429cg x6tc29j xbq7h4v x6jdkww xq9mrsl\">Matte Jeans Transparent frames with Polarized Dusty Blue lenses, to help you catch every detail and add definition to your everyday.</span>\n<div class=\"xeuugli x2lwn1j x78zum5 xig2svb x18vy5xy xlluq36 xoqi1js x6rffrw x18vhwb7 x79b4n4 x1lprzx0 x1or4hh0 x5pxerh x13fuv20 xu3j5b3 x1q0q8m5 x26u7qi x972fbf xcfux6l x1qhh985 xm0m39n\"><span class=\"xbks1sj x17gzxuv x3a6nna xm5vtmc x1t2x7uc x1o1n6r0 x1wsgf3v x1c773n9 x1k03ns3 xpbi8i2 x9820fh x1npfmwo xhj0du5 xrm2kyc xjprkx4 xlu1awn x12429cg x6tc29j xbq7h4v x6jdkww xq9mrsl\">Polar technology intercepts reflections and reduces glare for better contrast and improved clarity.</span></div>\n<div class=\"xeuugli x2lwn1j x78zum5 xig2svb x18vy5xy xlluq36 xoqi1js x6rffrw x18vhwb7 x79b4n4 x1lprzx0 x1or4hh0 x5pxerh x13fuv20 xu3j5b3 x1q0q8m5 x26u7qi x972fbf xcfux6l x1qhh985 xm0m39n\">\n<ul class=\"x1xfsgkm xtaz4m5\">\n<li class=\"\">Virtually eliminates glare from the sun</li>\n<li class=\"\">Enhances clarity and contrast</li>\n<li class=\"\">100% UVA &amp; UVB protection</li>\n</ul>\n</div>\n</div>\n</div>\n</div>",
+            "vendor": "verveARshop",
+            "product_type": "",
+            "created_at": "2024-10-12T02:47:56-04:00",
+            "handle": "rayban-brown-skylar",
+            "updated_at": "2024-11-12T08:06:08-05:00",
+            "published_at": "2024-10-12T02:47:56-04:00",
+            "template_suffix": "",
+            "published_scope": "global",
+            "tags": "vervear, vto-glasses",
+            "status": "active",
+            "admin_graphql_api_id": "gid://shopify/Product/8082769379500",
+            "variants": [
+                {
+                    "id": 43881633579180,
+                    "product_id": 8082769379500,
+                    "title": "Default Title",
+                    "price": "0.00",
+                    "position": 2,
+                    "inventory_policy": "continue",
+                    "compare_at_price": null,
+                    "option1": "Default Title",
+                    "option2": null,
+                    "option3": null,
+                    "created_at": "2024-10-12T02:47:59-04:00",
+                    "updated_at": "2024-10-12T02:47:59-04:00",
+                    "taxable": true,
+                    "barcode": "",
+                    "fulfillment_service": "manual",
+                    "grams": 0,
+                    "inventory_management": "shopify",
+                    "requires_shipping": true,
+                    "sku": "",
+                    "weight": 0,
+                    "weight_unit": "kg",
+                    "inventory_item_id": 45956054188204,
+                    "inventory_quantity": 0,
+                    "old_inventory_quantity": 0,
+                    "admin_graphql_api_id": "gid://shopify/ProductVariant/43881633579180",
+                    "image_id": null
+                }
+            ],
+            "options": [
+                {
+                    "id": 10367693357228,
+                    "product_id": 8082769379500,
+                    "name": "Title",
+                    "position": 1,
+                    "values": [
+                        "Default Title"
+                    ]
+                }
+            ],
+            "images": [
+                {
+                    "id": 37669504057516,
+                    "alt": null,
+                    "position": 1,
+                    "product_id": 8082769379500,
+                    "created_at": "2024-10-12T02:47:25-04:00",
+                    "updated_at": "2024-10-12T02:47:56-04:00",
+                    "admin_graphql_api_id": "gid://shopify/ProductImage/37669504057516",
+                    "width": 799,
+                    "height": 800,
+                    "src": "https://cdn.shopify.com/s/files/1/0664/9272/7468/files/model-snapshot_3.png?v=1728715646",
+                    "variant_ids": []
+                },
+                {
+                    "id": 37669363220652,
+                    "alt": null,
+                    "position": 2,
+                    "product_id": 8082769379500,
+                    "created_at": "2024-10-12T02:41:35-04:00",
+                    "updated_at": "2024-10-12T02:51:07-04:00",
+                    "admin_graphql_api_id": "gid://shopify/ProductImage/37669363220652",
+                    "width": 798,
+                    "height": 800,
+                    "src": "https://cdn.shopify.com/s/files/1/0664/9272/7468/files/model-snapshot_4.png?v=1728715296",
+                    "variant_ids": []
+                },
+                {
+                    "id": 37658668662956,
+                    "alt": null,
+                    "position": 3,
+                    "product_id": 8082769379500,
+                    "created_at": "2024-10-10T19:02:28-04:00",
+                    "updated_at": "2024-10-13T15:29:05-04:00",
+                    "admin_graphql_api_id": "gid://shopify/ProductImage/37658668662956",
+                    "width": 798,
+                    "height": 800,
+                    "src": "https://cdn.shopify.com/s/files/1/0664/9272/7468/files/model-snapshot_6.png?v=1728601349",
+                    "variant_ids": []
+                }
+            ],
+            "image": {
+                "id": 37669504057516,
+                "alt": null,
+                "position": 1,
+                "product_id": 8082769379500,
+                "created_at": "2024-10-12T02:47:25-04:00",
+                "updated_at": "2024-10-12T02:47:56-04:00",
+                "admin_graphql_api_id": "gid://shopify/ProductImage/37669504057516",
+                "width": 799,
+                "height": 800,
+                "src": "https://cdn.shopify.com/s/files/1/0664/9272/7468/files/model-snapshot_3.png?v=1728715646",
+                "variant_ids": []
+            }
+        },
+        {
+            "id": 8081486938284,
+            "title": "Rayban Meta Wayfarer",
+            "body_html": "<div class=\"x1lliihq x137v6ai\"><span class=\"x16g9bbj x17gzxuv xv6bue1 xex5isp xsp84uj x1j402mz x1wsgf3v x14imz66 xby3lk6 xcxolhg xjbavb x1npfmwo x16b4c32 x1yyhlu9 x1i6xp69 xvyeec0 x12429cg x6tc29j xbq7h4v x6jdkww xq9mrsl\">Ray-Ban Meta Wayfarer</span></div>\n<div class=\"ma-wd_739px xeuugli x2lwn1j x78zum5 xig2svb x18vy5xy xlluq36 xwy3nlu xpu8j0z xfzd5jt x79b4n4 x1lprzx0 x1or4hh0 x5pxerh x13fuv20 xu3j5b3 x1q0q8m5 x26u7qi x972fbf xcfux6l x1qhh985 xm0m39n\">\n<div>\n<div class=\"xeuugli x2lwn1j x78zum5 x19xhxss x6hrlo1 x1m11752 x1dn74xm x4a20bl xtatjob x79b4n4 x1lprzx0 x1or4hh0 x5pxerh x13fuv20 xu3j5b3 x1q0q8m5 x26u7qi x972fbf xcfux6l x1qhh985 xm0m39n\">\n<span class=\"xbks1sj x17gzxuv x3a6nna xm5vtmc x1t2x7uc x1o1n6r0 x1wsgf3v x1c773n9 x1k03ns3 xpbi8i2 x9820fh x1npfmwo xhj0du5 xrm2kyc xjprkx4 xlu1awn x12429cg x6tc29j xbq7h4v x6jdkww xq9mrsl\">Matte Jeans Transparent frames with Polarized Dusty Blue lenses, to help you catch every detail and add definition to your everyday.</span>\n<div class=\"xeuugli x2lwn1j x78zum5 xig2svb x18vy5xy xlluq36 xoqi1js x6rffrw x18vhwb7 x79b4n4 x1lprzx0 x1or4hh0 x5pxerh x13fuv20 xu3j5b3 x1q0q8m5 x26u7qi x972fbf xcfux6l x1qhh985 xm0m39n\"><span class=\"xbks1sj x17gzxuv x3a6nna xm5vtmc x1t2x7uc x1o1n6r0 x1wsgf3v x1c773n9 x1k03ns3 xpbi8i2 x9820fh x1npfmwo xhj0du5 xrm2kyc xjprkx4 xlu1awn x12429cg x6tc29j xbq7h4v x6jdkww xq9mrsl\">Polar technology intercepts reflections and reduces glare for better contrast and improved clarity.</span></div>\n<div class=\"xeuugli x2lwn1j x78zum5 xig2svb x18vy5xy xlluq36 xoqi1js x6rffrw x18vhwb7 x79b4n4 x1lprzx0 x1or4hh0 x5pxerh x13fuv20 xu3j5b3 x1q0q8m5 x26u7qi x972fbf xcfux6l x1qhh985 xm0m39n\">\n<ul class=\"x1xfsgkm xtaz4m5\">\n<li class=\"\">Virtually eliminates glare from the sun</li>\n<li class=\"\">Enhances clarity and contrast</li>\n<li class=\"\">100% UVA &amp; UVB protection</li>\n</ul>\n</div>\n</div>\n</div>\n</div>",
+            "vendor": "verveARshop",
+            "product_type": "",
+            "created_at": "2024-10-10T19:02:32-04:00",
+            "handle": "rayban-clear-water-melon",
+            "updated_at": "2024-11-12T08:06:08-05:00",
+            "published_at": "2024-10-10T19:02:32-04:00",
+            "template_suffix": "",
+            "published_scope": "global",
+            "tags": "vervear",
+            "status": "active",
+            "admin_graphql_api_id": "gid://shopify/Product/8081486938284",
+            "variants": [
+                {
+                    "id": 43877808570540,
+                    "product_id": 8081486938284,
+                    "title": "Default Title",
+                    "price": "499.99",
+                    "position": 2,
+                    "inventory_policy": "deny",
+                    "compare_at_price": null,
+                    "option1": "Default Title",
+                    "option2": null,
+                    "option3": null,
+                    "created_at": "2024-10-10T19:02:33-04:00",
+                    "updated_at": "2024-10-10T19:04:25-04:00",
+                    "taxable": false,
+                    "barcode": "",
+                    "fulfillment_service": "manual",
+                    "grams": 0,
+                    "inventory_management": "shopify",
+                    "requires_shipping": true,
+                    "sku": "",
+                    "weight": 0,
+                    "weight_unit": "kg",
+                    "inventory_item_id": 45952204964012,
+                    "inventory_quantity": 0,
+                    "old_inventory_quantity": 0,
+                    "admin_graphql_api_id": "gid://shopify/ProductVariant/43877808570540",
+                    "image_id": null
+                }
+            ],
+            "options": [
+                {
+                    "id": 10366186356908,
+                    "product_id": 8081486938284,
+                    "name": "Title",
+                    "position": 1,
+                    "values": [
+                        "Default Title"
+                    ]
+                }
+            ],
+            "images": [
+                {
+                    "id": 37658668662956,
+                    "alt": null,
+                    "position": 1,
+                    "product_id": 8081486938284,
+                    "created_at": "2024-10-10T19:02:28-04:00",
+                    "updated_at": "2024-10-13T15:29:05-04:00",
+                    "admin_graphql_api_id": "gid://shopify/ProductImage/37658668662956",
+                    "width": 798,
+                    "height": 800,
+                    "src": "https://cdn.shopify.com/s/files/1/0664/9272/7468/files/model-snapshot_6.png?v=1728601349",
+                    "variant_ids": []
+                }
+            ],
+            "image": {
+                "id": 37658668662956,
+                "alt": null,
+                "position": 1,
+                "product_id": 8081486938284,
+                "created_at": "2024-10-10T19:02:28-04:00",
+                "updated_at": "2024-10-13T15:29:05-04:00",
+                "admin_graphql_api_id": "gid://shopify/ProductImage/37658668662956",
+                "width": 798,
+                "height": 800,
+                "src": "https://cdn.shopify.com/s/files/1/0664/9272/7468/files/model-snapshot_6.png?v=1728601349",
+                "variant_ids": []
+            }
+        }
+    ]
+}

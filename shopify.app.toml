@@ -3,14 +3,18 @@
 client_id = "ff8f1f0232a62880a73e6b9b010ebd2f"
 name = "VerveAR"
 handle = "vervear"
-application_url = "https://contemporary-walls-historical-current.trycloudflare.com"
-embedded = false
+application_url = "https://rapids-reaction-remains-div.trycloudflare.com"
+embedded = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products,read_products"
 
 [auth]
 redirect_urls = [
-  "https://contemporary-walls-historical-current.trycloudflare.com/auth/callback",
-  "https://contemporary-walls-historical-current.trycloudflare.com/auth/shopify/callback",
-  "https://contemporary-walls-historical-current.trycloudflare.com/api/auth/callback"
+  "https://rapids-reaction-remains-div.trycloudflare.com/auth/callback",
+  "https://rapids-reaction-remains-div.trycloudflare.com/auth/shopify/callback",
+  "https://rapids-reaction-remains-div.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
@@ -25,3 +29,4 @@ url = "https://app.vervear.com/"
 [build]
 dev_store_url = "vervearshop.myshopify.com"
 automatically_update_urls_on_dev = true
+include_config_on_deploy = true

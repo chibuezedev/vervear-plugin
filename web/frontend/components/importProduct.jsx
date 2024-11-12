@@ -20,7 +20,6 @@ export function ImportProductsModal({ open, onClose, onImportComplete }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Load store products when modal opens
   useEffect(() => {
     if (open) {
       setIsLoading(true);

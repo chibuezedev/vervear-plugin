@@ -17,12 +17,10 @@ import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
 import { ImportProductsModal } from "../components/importProduct";
 import { ProductList } from "../components/productList";
-import { useAuthenticatedFetch } from "../hooks";
 
 export default function HomePage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const fetch = useAuthenticatedFetch();
 
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   const [products, setProducts] = useState([]);
@@ -50,9 +48,15 @@ export default function HomePage() {
 
   async function loadProducts() {
     try {
-      const response = await fetch("/api/ar-products");
+      const response = await fetch("/api/import-products-by-tag", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const data = await response.json();
-      setProducts(data.products);
+      console.log("Store Products", data);
+      setProducts(data.data);
     } catch (error) {
       setStatusMessage({
         content: "Error loading products",
@@ -85,7 +89,6 @@ export default function HomePage() {
 
   return (
     <Page narrowWidth>
-      <TitleBar title="AR Product Management" primaryAction={primaryActions} />
 
       <Layout>
         {statusMessage && (
@@ -98,31 +101,6 @@ export default function HomePage() {
             </Banner>
           </Layout.Section>
         )}
-
-        <Layout.Section>
-          <AlphaCard sectioned>
-            <Stack vertical spacing="loose">
-              <TextContainer>
-                <Text as="h2" variant="headingMd">
-                  Welcome to AR Product Management
-                </Text>
-                <p>
-                  Enhance your products with AR/VR experiences. Import your
-                  existing products or create new ones to get started.
-                </p>
-              </TextContainer>
-
-              <Stack distribution="trailing">
-                <Button onClick={() => navigate("/new")}>
-                  Create Product
-                </Button>
-                <Button primary onClick={() => setIsImportModalOpen(true)}>
-                  Import Products
-                </Button>
-              </Stack>
-            </Stack>
-          </AlphaCard>
-        </Layout.Section>
 
         <Layout.Section>
           {isLoading ? (
@@ -153,6 +131,29 @@ export default function HomePage() {
               </EmptyState>
             </AlphaCard>
           )}
+        </Layout.Section>
+
+        <Layout.Section>
+          <AlphaCard sectioned>
+            <Stack vertical spacing="loose">
+              <TextContainer>
+                <Text as="h2" variant="headingMd">
+                  Welcome to AR Product Management
+                </Text>
+                <p>
+                  Enhance your products with AR/VR experiences. Import your
+                  existing products or create new ones to get started.
+                </p>
+              </TextContainer>
+
+              <Stack distribution="trailing">
+                <Button onClick={() => navigate("/new")}>Create Product</Button>
+                <Button primary onClick={() => setIsImportModalOpen(true)}>
+                  Import Products
+                </Button>
+              </Stack>
+            </Stack>
+          </AlphaCard>
         </Layout.Section>
       </Layout>
 
