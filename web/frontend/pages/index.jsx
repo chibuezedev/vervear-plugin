@@ -147,7 +147,7 @@ export default function HomePage() {
               </TextContainer>
 
               <Stack distribution="trailing">
-                <Button onClick={() => navigate("/new")}>Create Product</Button>
+                <Button onClick={() => navigate("/viewer")}>Upload 3D Model</Button>
                 <Button primary onClick={() => setIsImportModalOpen(true)}>
                   Import Products
                 </Button>

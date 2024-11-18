@@ -1,0 +1,302 @@
+{% if product.metafields.ar_viewer.viewer_url %}
+<style>
+.viewer-container {
+  --button-bg-color: {{ section.settings.button_bg_color | default: '#000000' }};
+  --button-text-color: {{ section.settings.button_text_color | default: '#FFFFFF' }};
+  --button-border-radius: {{ section.settings.button_border_radius | default: 5 }}px;
+  --icon-size: {{ section.settings.icon_size | default: 24 }}px;
+  --button-padding: {{ section.settings.button_padding | default: 16 }}px;
+  text-align: {{ section.settings.button_position | default: 'left' }};
+}
+
+.view-3d-button {
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  padding: 10px var(--button-padding);
+  text-align: center;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: var(--button-border-radius);
+  max-width: 1440px;
+  width: 100%;
+  height: auto;
+  line-height: 30px;
+  border: 2px solid var(--button-text-color);
+  margin: 20px 0;
+  transition: background-color 0.3s ease;
+}
+
+.view-3d-button:hover {
+  background-color: {{ section.settings.button_bg_color | color_modify: 'lightness', 20 }};
+}
+
+.view-3d-button svg {
+  margin-right: 8px;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  display: {% if section.settings.show_icon %}inline-block{% else %}none{% endif %};
+}
+
+.view-3d-button[data-show-shadow="true"] {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 2147483647;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  position: relative;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: #000;
+  text-decoration: none;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 50%;
+  z-index: 20;
+}
+</style>
+
+<div 
+  id="verve-3d-viewer" 
+  class="viewer-container" 
+  data-product-id="{{ product.id }}"
+  data-viewer-url="{{ product.metafields.ar_viewer.viewer_url }}"
+>
+  <a href="javascript:void(0);" 
+     onclick="window.productViewer.openModal()" 
+     class="view-3d-button"
+     {% if section.settings.show_button_shadow %}data-show-shadow="true"{% endif %}
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+      <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M201.14 64L256 32l54.86 32"/>
+      <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M256 32v80"/>
+      <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M310.86 448L256 480l-54.86-32"/>
+      <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M256 480v-80"/>
+      <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M64 207.51V144l53.15-31.51"/>
+      <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="m64 144l67.29 40"/>
+      <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M448 304.49V368l-53.15 31.51"/>
+      <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="m448 368l-67.29-40"/>
+      <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M117.15 400L64 368v-63.51"/>
+      <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="m64 368l66.64-40"/>
+      <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M394.85 112.49L448 144v63.51"/>
+      <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="m448 144l-67.29 40M256 320v-64l54.86-32M256 256l-54.86-32"/>
+    </svg>
+    {% if section.settings.button_text != blank %}
+      {{ section.settings.button_text }}
+    {% else %}
+      VIEW IN 3D & AR
+    {% endif %}
+  </a>
+</div>
+
+<script>
+  class ProductViewer {
+    constructor() {
+      this.modal = null;
+      this.modalContent = null;
+      this.iframe = null;
+      this.initialize();
+    }
+  
+    initialize() {
+      if (!document.getElementById('iframeModal')) {
+        this.createModal();
+      }
+      window.addEventListener('resize', () => this.adjustModalDimensions());
+    }
+  
+    createModal() {
+      this.modal = document.createElement('div');
+      this.modal.id = 'iframeModal';
+      this.modal.className = 'modal-overlay';
+  
+      this.modalContent = document.createElement('div');
+      this.modalContent.className = 'modal-content';
+  
+      const closeButton = document.createElement('a');
+      closeButton.href = 'javascript:void(0);';
+      closeButton.className = 'modal-close';
+      closeButton.innerHTML = '×';
+      closeButton.onclick = () => this.closeModal();
+  
+      this.iframe = document.createElement('iframe');
+      this.iframe.frameBorder = '0';
+      this.iframe.allow = 'camera; microphone';
+      this.iframe.style.cssText = 'position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;';
+  
+      this.modalContent.appendChild(closeButton);
+      this.modalContent.appendChild(this.iframe);
+      this.modal.appendChild(this.modalContent);
+      document.body.appendChild(this.modal);
+    }
+  
+    openModal() {
+      const viewerContainer = document.getElementById('verve-3d-viewer');
+      const viewerUrl = viewerContainer.dataset.viewerUrl;
+      
+      if (viewerUrl) {
+        this.iframe.src = viewerUrl;
+        this.modal.style.display = 'flex';
+        this.adjustModalDimensions();
+      }
+    }
+  
+    closeModal() {
+      this.modal.style.display = 'none';
+      this.iframe.src = '';
+    }
+  
+    adjustModalDimensions() {
+      const modalWidth = {{ section.settings.modal_width | default: 80 }};
+      const modalHeight = {{ section.settings.modal_height | default: 90 }};
+      this.modalContent.style.width = (window.innerWidth * modalWidth / 100) + 'px';
+      this.modalContent.style.height = (window.innerHeight * modalHeight / 100) + 'px';
+    }
+  }
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    window.productViewer = new ProductViewer();
+  });
+</script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "3D Viewer Button",
+  "target": "section",
+  "templates": ["product"],
+  "settings": [
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "VIEW IN 3D & AR"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button Border Radius",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "default": 5,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button_shadow",
+      "label": "Show Button Shadow",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icon",
+      "label": "Show 3D Icon",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon Size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "button_position",
+      "label": "Button Position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "button_padding",
+      "label": "Button Padding",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Modal Settings"
+    },
+    {
+      "type": "range",
+      "id": "modal_width",
+      "label": "Modal Width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "default": 80,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "modal_height",
+      "label": "Modal Height",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "default": 90,
+      "unit": "%"
+    }
+  ]
+}
+{% endschema %}

@@ -187,6 +187,33 @@ app.get("/api/import-products-by-tag", async (req, res) => {
   }
 });
 
+app.post("/api/update-viewer-url", async (req, res) => {
+  try {
+    const { productId, viewerUrl } = req.body;
+    const client = new shopify.api.clients.Rest({
+      session: res.locals.shopify.session,
+    });
+
+    // Save the viewer URL as a metafield for the product
+   const response = await client.post({
+      path: `products/${productId}/metafields`,
+      data: {
+        metafield: {
+          namespace: "ar_viewer",
+          key: "viewer_url",
+          value: viewerUrl,
+          type: "single_line_text_field",
+        },
+      },
+    });
+
+    res.status(200).json({ success: true, response });
+  } catch (error) {
+    console.error("Error updating viewer URL:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 app.post("/update-product-template", async (req, res) => {
   const { shopDomain, productHandle, modelPreviewLink } = req.body;
 
