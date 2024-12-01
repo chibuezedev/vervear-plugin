@@ -187,6 +187,26 @@ app.get("/api/import-products-by-tag", async (req, res) => {
   }
 });
 
+
+app.get("/api/products/:id", async (req, res) => {
+  try {
+    const client = new shopify.api.clients.Rest({
+      session: res.locals.shopify.session,
+    });
+
+    const productId = req.params.id;
+
+    const response = await client.get({
+      path: `products/${productId}`,
+    });
+
+    res.status(200).json({ product: response.body.product });
+  } catch (error) {
+    console.error(`Error fetching product ${req.params.id}:`, error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 app.post("/api/update-viewer-url", async (req, res) => {
   try {
     const { productId, viewerUrl } = req.body;
