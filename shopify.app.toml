@@ -3,6 +3,7 @@
 client_id = "ff8f1f0232a62880a73e6b9b010ebd2f"
 name = "VerveAR"
 handle = "vervear"
+
 application_url = "https://mv-licence-assumes-turkey.trycloudflare.com"
 embedded = true
 

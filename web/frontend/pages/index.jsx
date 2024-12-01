@@ -11,12 +11,18 @@ import {
   Spinner,
   Link,
   Text,
+  Card,
+  Heading,
+  ButtonGroup,
+  CalloutCard,
+  Box,
 } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
 import { ImportProductsModal } from "../components/importProduct";
 import { ProductList } from "../components/productList";
+import { SimpleIndexTableExample } from "../components/Product";
 
 export default function HomePage() {
   const { t } = useTranslation();
@@ -88,10 +94,42 @@ export default function HomePage() {
   ];
 
   return (
-    <Page narrowWidth>
+    <Page fullWidth>
+      <div style={{marginBottom: 20, display: 'flex', justifyContent: 'space-between'}}>
+        <div>
+        <Text variant="heading2xl" as="h4">
+          VerveAR 3D, AR & Virtual Try-On
+        </Text>
+
+            <p>Start transforming your online store experience by adding 3D & AR to your product catalog</p>
+        </div>
+          <Button
+            monochrome
+            // icon={IconComponent} 
+            size="large"
+        
+          >
+            Go to VerveAR Studio
+          </Button>
+      </div>
+      <div style={{marginBottom: 20}}>
+        <CalloutCard
+              title="Welcome to your VerveAR dashboard"
+              illustration="./assets/Illustration.svg"
+              primaryAction={{
+                content: 'Watch Tutorial',
+                url: '#',
+              }}
+            >
+              <p> Your VerveAR app is all set to elevate your Shopify store to the next level with
+                3D, Augmented Reality (AR), and Virtual Try-On shopping experiences. Here you will
+                be able to embed 3D, AR, or Virtual Try-On Shopping experience for any product on
+                your website.</p>
+          </CalloutCard>
+      </div>
 
       <Layout>
-        {statusMessage && (
+        {/* {statusMessage && (
           <Layout.Section>
             <Banner
               status={statusMessage.error ? "critical" : "success"}
@@ -100,8 +138,7 @@ export default function HomePage() {
               <p>{statusMessage.content}</p>
             </Banner>
           </Layout.Section>
-        )}
-
+        )} */}
         <Layout.Section>
           {isLoading ? (
             <AlphaCard sectioned>
@@ -110,51 +147,30 @@ export default function HomePage() {
               </Stack>
             </AlphaCard>
           ) : products.length > 0 ? (
-            <ProductList products={products} onUpdate={loadProducts} />
+            // <ProductList products={products} onUpdate={loadProducts} />
+            <SimpleIndexTableExample products={products} onUpdate={loadProducts} />
           ) : (
             <AlphaCard sectioned>
               <EmptyState
-                heading="Add AR to your products"
+                heading="Add 3D, AR & Virtual Try-On to your product page"
                 action={{
-                  content: "Import Products",
+                  content: "Add tag to products",
                   onAction: () => setIsImportModalOpen(true),
                 }}
                 secondaryAction={{
-                  content: "Create Product",
+                  content: "Watch Tutorial",
                   onAction: () => navigate("/new"),
                 }}
-                image="https://cdn.shopify.com/s/files/1/0262/4071/2726/files/emptystate-files.png"
+                image="./assets/emptys.svg"
               >
                 <p>
-                  Start by importing your existing products or create new ones.
+                To get started you will need to add a simple tag “vervear” to any 
+                product on your online store and it will appear in the VerveAR app. 
                 </p>
               </EmptyState>
             </AlphaCard>
           )}
-        </Layout.Section>
-
-        <Layout.Section>
-          <AlphaCard sectioned>
-            <Stack vertical spacing="loose">
-              <TextContainer>
-                <Text as="h2" variant="headingMd">
-                  Welcome to AR Product Management
-                </Text>
-                <p>
-                  Enhance your products with AR/VR experiences. Import your
-                  existing products or create new ones to get started.
-                </p>
-              </TextContainer>
-
-              <Stack distribution="trailing">
-                <Button onClick={() => navigate("/viewer")}>Upload 3D Model</Button>
-                <Button primary onClick={() => setIsImportModalOpen(true)}>
-                  Import Products
-                </Button>
-              </Stack>
-            </Stack>
-          </AlphaCard>
-        </Layout.Section>
+         </Layout.Section>
       </Layout>
 
       <ImportProductsModal
