@@ -1,12 +1,12 @@
 {% if product.metafields.ar_viewer.viewer_url %}
 <style>
 .viewer-container {
-  --button-bg-color: {{ section.settings.button_bg_color | default: '#000000' }};
-  --button-text-color: {{ section.settings.button_text_color | default: '#FFFFFF' }};
-  --button-border-radius: {{ section.settings.button_border_radius | default: 5 }}px;
-  --icon-size: {{ section.settings.icon_size | default: 24 }}px;
-  --button-padding: {{ section.settings.button_padding | default: 16 }}px;
-  text-align: {{ section.settings.button_position | default: 'left' }};
+  --button-bg-color: {{ block.settings.button_bg_color | default: '#000000' }};
+  --button-text-color: {{ block.settings.button_text_color | default: '#FFFFFF' }};
+  --button-border-radius: {{ block.settings.button_border_radius | default: 5 }}px;
+  --icon-size: {{ block.settings.icon_size | default: 24 }}px;
+  --button-padding: {{ block.settings.button_padding | default: 16 }}px;
+  text-align: {{ block.settings.button_position | default: 'left' }};
 }
 
 .view-3d-button {
@@ -31,14 +31,14 @@
 }
 
 .view-3d-button:hover {
-  background-color: {{ section.settings.button_bg_color | color_modify: 'lightness', 20 }};
+  background-color: {{ block.settings.button_bg_color | color_modify: 'lightness', 20 }};
 }
 
 .view-3d-button svg {
   margin-right: 8px;
   width: var(--icon-size);
   height: var(--icon-size);
-  display: {% if section.settings.show_icon %}inline-block{% else %}none{% endif %};
+  display: {% if block.settings.show_icon %}inline-block{% else %}none{% endif %};
 }
 
 .view-3d-button[data-show-shadow="true"] {
@@ -92,7 +92,7 @@
   <a href="javascript:void(0);" 
      onclick="window.productViewer.openModal()" 
      class="view-3d-button"
-     {% if section.settings.show_button_shadow %}data-show-shadow="true"{% endif %}
+     {% if block.settings.show_button_shadow %}data-show-shadow="true"{% endif %}
   >
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
       <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M201.14 64L256 32l54.86 32"/>
@@ -108,8 +108,8 @@
       <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M394.85 112.49L448 144v63.51"/>
       <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="m448 144l-67.29 40M256 320v-64l54.86-32M256 256l-54.86-32"/>
     </svg>
-    {% if section.settings.button_text != blank %}
-      {{ section.settings.button_text }}
+    {% if block.settings.button_text != blank %}
+      {{ block.settings.button_text }}
     {% else %}
       VIEW IN 3D & AR
     {% endif %}
