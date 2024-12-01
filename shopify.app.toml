@@ -3,7 +3,7 @@
 client_id = "ff8f1f0232a62880a73e6b9b010ebd2f"
 name = "VerveAR"
 handle = "vervear"
-application_url = "https://neo-followed-sunset-ignored.trycloudflare.com"
+application_url = "https://mv-licence-assumes-turkey.trycloudflare.com"
 embedded = true
 
 [access_scopes]
@@ -12,9 +12,9 @@ scopes = "write_products,read_products,read_themes,write_themes"
 
 [auth]
 redirect_urls = [
-  "https://neo-followed-sunset-ignored.trycloudflare.com/auth/callback",
-  "https://neo-followed-sunset-ignored.trycloudflare.com/auth/shopify/callback",
-  "https://neo-followed-sunset-ignored.trycloudflare.com/api/auth/callback"
+  "https://mv-licence-assumes-turkey.trycloudflare.com/auth/callback",
+  "https://mv-licence-assumes-turkey.trycloudflare.com/auth/shopify/callback",
+  "https://mv-licence-assumes-turkey.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
