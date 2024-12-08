@@ -155,31 +155,71 @@ app.get("/api/import-products-by-tag", async (req, res) => {
       },
     });
 
+
     const productsToImport = response.body.products.filter((product) =>
       product.tags.includes(tagToImport)
     );
 
-    // create metafields for each imported product
-    const importPromises = productsToImport.map(async (product) => {
-      await client.post({
-        path: `products/${product.id}/metafields`,
-        data: {
-          metafield: {
-            namespace: "ar_model",
-            key: "enabled",
-            value: "true",
-            type: "single_line_text_field",
+    // fetch metafields for each product to check for viewer URL
+    const productsWithDetails = await Promise.all(
+      productsToImport.map(async (product) => {
+        try {
+
+          // get metafields for the product
+          const metafieldsResponse = await client.get({
+            path: `products/${product.id}/metafields`,
+            query: {
+              namespace: "ar_viewer",
+            },
+          });
+
+          // check if viewer URL metafield exists
+          const viewerUrlMetafield = metafieldsResponse.body.metafields.find(
+            (metafield) => metafield.key === "viewer_url"
+          );
+
+          return {
+            ...product,
+            hasViewerUrl: !!viewerUrlMetafield,
+            viewerUrl: viewerUrlMetafield ? viewerUrlMetafield.value : null,
+          };
+        } catch (metafieldError) {
+          console.error(
+            `Error fetching metafields for product ${product.id}:`,
+            metafieldError
+          );
+          return {
+            ...product,
+            hasViewerUrl: false,
+            viewerUrl: null,
+          };
+        }
+      })
+    );
+
+    // create metafields for AR model enabled (if not already exists)
+    const importPromises = productsWithDetails.map(async (product) => {
+      if (!product.hasViewerUrl) {
+        await client.post({
+          path: `products/${product.id}/metafields`,
+          data: {
+            metafield: {
+              namespace: "ar_model",
+              key: "enabled",
+              value: "true",
+              type: "single_line_text_field",
+            },
           },
-        },
-      });
+        });
+      }
     });
 
     await Promise.all(importPromises);
 
     res.status(200).json({
       success: true,
-      message: `Successfully imported ${productsToImport.length} products`,
-      data: productsToImport,
+      message: `Successfully imported ${productsWithDetails.length} products`,
+      data: productsWithDetails,
     });
   } catch (error) {
     console.log("Error importing products:", error);
