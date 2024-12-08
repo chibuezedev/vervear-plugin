@@ -49,9 +49,6 @@ export function ProductList({ products, onUpdate }) {
               >
                 {hasARModel ? "Update AR Model" : "Add AR Model"}
               </Button>
-              <Button size="slim" url={`/products/${id}`}>
-                Edit
-              </Button>
             </ButtonGroup>
           </Stack.Item>
         </Stack>
