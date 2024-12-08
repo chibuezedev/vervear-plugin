@@ -23,6 +23,7 @@ import { useState, useEffect } from "react";
 import { ImportProductsModal } from "../components/importProduct";
 import { ProductList } from "../components/productList";
 import { SimpleIndexTableExample } from "../components/Product";
+import IndexFiltersDefaultExample from "../components/Table";
 
 export default function HomePage() {
   const { t } = useTranslation();
@@ -105,7 +106,7 @@ export default function HomePage() {
         </div>
           <Button
             monochrome
-            // icon={IconComponent} 
+            // icon={}
             size="large"
         
           >
@@ -120,6 +121,7 @@ export default function HomePage() {
                 content: 'Watch Tutorial',
                 url: '#',
               }}
+              secondaryAction={{content: 'Schedule a demo', url: ''}}
             >
               <p> Your VerveAR app is all set to elevate your Shopify store to the next level with
                 3D, Augmented Reality (AR), and Virtual Try-On shopping experiences. Here you will
@@ -148,7 +150,8 @@ export default function HomePage() {
             </AlphaCard>
           ) : products.length > 0 ? (
             // <ProductList products={products} onUpdate={loadProducts} />
-            <SimpleIndexTableExample products={products} onUpdate={loadProducts} />
+            // <SimpleIndexTableExample products={products} onUpdate={loadProducts} />
+            <IndexFiltersDefaultExample products={products} onUpdate={loadProducts} />
           ) : (
             <AlphaCard sectioned>
               <EmptyState
