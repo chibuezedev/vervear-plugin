@@ -240,7 +240,39 @@ app.get("/api/products/:id", async (req, res) => {
       path: `products/${productId}`,
     });
 
-    res.status(200).json({ product: response.body.product });
+    const product = response.body.product;
+
+    try {
+      const metafieldsResponse = await client.get({
+        path: `products/${productId}/metafields`,
+        query: {
+          namespace: "ar_viewer",
+        },
+      });
+
+  
+      const viewerUrlMetafield = metafieldsResponse.body.metafields.find(
+        (metafield) => metafield.key === "viewer_url"
+      );
+
+      const productWithViewerDetails = {
+        ...product,
+        hasViewerUrl: !!viewerUrlMetafield,
+        viewerUrl: viewerUrlMetafield ? viewerUrlMetafield.value : null,
+      };
+
+      res.status(200).json({ product: productWithViewerDetails });
+    } catch (metafieldError) {
+      console.error(`Error fetching metafields for product ${productId}:`, metafieldError);
+      
+      const productWithViewerDetails = {
+        ...product,
+        hasViewerUrl: false,
+        viewerUrl: null,
+      };
+
+      res.status(200).json({ product: productWithViewerDetails });
+    }
   } catch (error) {
     console.error(`Error fetching product ${req.params.id}:`, error);
     res.status(500).json({ error: error.message });
