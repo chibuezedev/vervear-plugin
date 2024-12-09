@@ -27,6 +27,7 @@ import { useNavigate } from 'react-router-dom';
       'Published',
       'Unpublished',
     ]);
+    
 
     const handleSearchChange = useCallback(
       (e) => {
@@ -69,53 +70,45 @@ import { useNavigate } from 'react-router-dom';
   
 
 
-    const tabs = itemStrings.map((item, index) => ({
-      content: item,
-      index,
-      onAction: () => {},
-      id: `${item}-${index}`,
-      isLocked: index === 0,
-      actions:
-        index === 0
-          ? []
-          : [
-              {
-                type: 'rename',
-                onAction: () => {},
-                onPrimaryAction: async (value) => {
-                  const newItemsStrings = tabs.map((item, idx) => {
-                    if (idx === index) {
-                      return value;
-                    }
-                    return item.content;
-                  });
-                  await sleep(1);
-                  setItemStrings(newItemsStrings);
-                  return true;
-                },
-              },
-              {
-                type: 'duplicate',
-                onPrimaryAction: async (value) => {
-                  await sleep(1);
-                  duplicateView(value);
-                  return true;
-                },
-              },
-              {
-                type: 'edit',
-              },
-              {
-                type: 'delete',
-                onPrimaryAction: async () => {
-                  await sleep(1);
-                  deleteView(index);
-                  return true;
-                },
-              },
-            ],
-    }));
+  const tabs = itemStrings.map((item, index) => ({
+    content: (
+      <span
+        style={{
+          color: selectedTab === index ? 'white' : 'inherit',
+          backgroundColor: selectedTab === index ? 'green' : 'transparent',
+          padding: '5px 10px',
+          borderRadius: '5px',
+          cursor: 'pointer',
+        }}
+      >
+        {item}
+      </span>
+    ),
+    index,
+    id: `${item}-${index}`,
+    onAction: () => handleTabChange(index), // Call handleTabChange
+  }));;
+
+  const handleTabChange = (index) => {
+    setSelectedTab(index);
+    
+    // Update the selected tab
+
+    console.log(index)
   
+    if (index === 0) {
+      // Show all products
+      setFilteredProducts(products);
+    } else if (index === 1) {
+      // Show Published products
+      setFilteredProducts(products.filter((product) => product.hasViewerUrl === true));
+    } else if (index === 2) {
+      // Show Unpublished products
+      setFilteredProducts(products.filter((product) => product.hasViewerUrl === false));
+    }
+  };
+
+
     const [selected, setSelected] = useState(0);
   
     const onCreateNewView = async (value) => {
@@ -125,18 +118,18 @@ import { useNavigate } from 'react-router-dom';
       return true;
     };
   
-    const sortOptions = [
-      {label: 'Order', value: 'order asc', directionLabel: 'Ascending'},
-      {label: 'Order', value: 'order desc', directionLabel: 'Descending'},
-      {label: 'Customer', value: 'customer asc', directionLabel: 'A-Z'},
-      {label: 'Customer', value: 'customer desc', directionLabel: 'Z-A'},
-      {label: 'Date', value: 'date asc', directionLabel: 'A-Z'},
-      {label: 'Date', value: 'date desc', directionLabel: 'Z-A'},
-      {label: 'Total', value: 'total asc', directionLabel: 'Ascending'},
-      {label: 'Total', value: 'total desc', directionLabel: 'Descending'},
-    ];
+    // const sortOptions = [
+    //   {label: 'Order', value: 'order asc', directionLabel: 'Ascending'},
+    //   {label: 'Order', value: 'order desc', directionLabel: 'Descending'},
+    //   {label: 'Customer', value: 'customer asc', directionLabel: 'A-Z'},
+    //   {label: 'Customer', value: 'customer desc', directionLabel: 'Z-A'},
+    //   {label: 'Date', value: 'date asc', directionLabel: 'A-Z'},
+    //   {label: 'Date', value: 'date desc', directionLabel: 'Z-A'},
+    //   {label: 'Total', value: 'total asc', directionLabel: 'Ascending'},
+    //   {label: 'Total', value: 'total desc', directionLabel: 'Descending'},
+    // ];
   
-    const [sortSelected, setSortSelected] = useState(['order asc']);
+    // const [sortSelected, setSortSelected] = useState(['order asc']);
     const {mode, setMode} = useSetIndexFiltersMode();
   
     const onHandleCancel = () => {};
@@ -282,7 +275,7 @@ import { useNavigate } from 'react-router-dom';
     const {selectedResources, allResourcesSelected, handleSelectionChange} =
       useIndexResourceState(products);
   
-      const rowMarkup = paginatedProducts.map(({ id, title, images, hasARModel, status, created_at }, index) => {
+      const rowMarkup = paginatedProducts.map(({ id, title, images, hasARModel, status, created_at, hasViewerUrl }, index) => {
         const media = (
           <Thumbnail source={images[0].src || "placeholder-image.png"} alt={title} />
         );
@@ -307,8 +300,8 @@ import { useNavigate } from 'react-router-dom';
             {title}
             </Text>
           </IndexTable.Cell>
-          <IndexTable.Cell><Badge status={status.toLowerCase() === 'active' ? 'success' : 'critical'}>
-            {status}
+          <IndexTable.Cell><Badge status={hasViewerUrl ? 'success' : 'critical'}>
+            {hasViewerUrl ? 'Published' : 'unpublished'}
           </Badge></IndexTable.Cell>
           <IndexTable.Cell>
             {/* <Text as="span" alignment="center" numeric> */}
@@ -350,25 +343,23 @@ import { useNavigate } from 'react-router-dom';
         </div>
       <LegacyCard>
         <IndexFilters
-          sortOptions={sortOptions}
-          sortSelected={sortSelected}
+          // sortOptions={sortOptions}
+          // sortSelected={sortSelected}
           queryValue={queryValue}
           onQueryChange={handleFiltersQueryChange}
           onQueryClear={handleQueryValueRemove}
-          onSort={setSortSelected}
           tabs={tabs}
-          selected={selected}
+          selected={selectedTab}
           canCreateNewView={false}
           onCreateNewView={onCreateNewView}
-          filters={filters}
-          appliedFilters={appliedFilters}
-          onClearAll={handleFiltersClearAll}
           mode={mode}
           setMode={setMode}
-          primaryAction={primaryAction}
-          cancelAction={{
-            onAction: onHandleCancel,
-          }}
+          // primaryAction={primaryAction}
+          // cancelAction={{
+          //   onAction: onHandleCancel,
+          // }}
+          hideFilters
+          hideQueryField
           selectable={true} 
         />
         <IndexTable

@@ -165,7 +165,7 @@ export default function Index() {
         // activator={activator}
         open={active}
         onClose={handleChangee}
-        title="AR successfully added"
+        title="AR  successfully depolyed"
         // primaryAction={{
         //   content: 'Add Instagram',
         //   onAction: handleChange,
@@ -176,11 +176,16 @@ export default function Index() {
         //     onAction: handleChange,
         //   },
         // ]}
+          primaryAction={{
+            content: 'Close',
+            onAction: () => handleChangee(),
+          }}
       >
         <Modal.Section>
           <TextContainer>
             <p>
-             Your AR has been added to this product
+            You have successfully deployed 3D & AR content to this product’s page. 
+            To update 3D & AR content just upload another VerveAR script and publish again.
             </p>
           </TextContainer>
         </Modal.Section>
