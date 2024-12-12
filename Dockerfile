@@ -3,6 +3,9 @@ FROM node:18-alpine
 ARG SHOPIFY_API_KEY
 ENV SHOPIFY_API_KEY=$SHOPIFY_API_KEY
 
+# Install Shopify CLI globally
+RUN npm install -g @shopify/cli @shopify/app
+
 WORKDIR /app
 
 # Copy the entire project
