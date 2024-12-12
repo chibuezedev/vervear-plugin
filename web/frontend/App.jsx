@@ -1,13 +1,13 @@
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Routes as RouterRoutes, Route, Routes } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { NavMenu } from "@shopify/app-bridge-react";
-import Routes from "./Routes";
 
 import { QueryProvider, PolarisProvider } from "./components";
+import Index from "./pages/viewer";
+import HomePage from "./pages";
+import '@shopify/polaris/build/esm/styles.css';
 
 export default function App() {
-  // Any .tsx or .jsx files in /pages will become a route
-  // See documentation for <Routes /> for more info
   const pages = import.meta.glob("./pages/**/!(*.test.[jt]sx)*.([jt]sx)", {
     eager: true,
   });
@@ -17,11 +17,17 @@ export default function App() {
     <PolarisProvider>
       <BrowserRouter>
         <QueryProvider>
-          <NavMenu>
-            <a href="/" rel="home" />
-            <a href="/pagename">{t("NavigationMenu.pageName")}</a>
-          </NavMenu>
-          <Routes pages={pages} />
+            <NavMenu>
+              <a href="/" rel="home">{t("NavigationMenu.home")}</a>
+              <a href="/pagename">{t("NavigationMenu.pageName")}</a>
+            </NavMenu>
+          <RouterRoutes>
+            {/* Define routes here */}
+            <Route path="/" element={<HomePage />} />
+            <Route path="/viewer/:productId" element={<Index />} />
+            {/* Dynamically load other pages */}
+            <Route path="*" element={<Routes pages={pages} />} />
+          </RouterRoutes>
         </QueryProvider>
       </BrowserRouter>
     </PolarisProvider>
