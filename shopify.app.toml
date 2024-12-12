@@ -3,7 +3,7 @@
 client_id = "ff8f1f0232a62880a73e6b9b010ebd2f"
 name = "VerveAR"
 handle = "vervear"
-application_url = "https://weblogs-warner-estonia-yourself.trycloudflare.com"
+application_url = "https://clinics-editing-population-rack.trycloudflare.com"
 embedded = true
 
 [access_scopes]
@@ -12,9 +12,9 @@ scopes = "write_products,read_products,read_themes,write_themes"
 
 [auth]
 redirect_urls = [
-  "https://weblogs-warner-estonia-yourself.trycloudflare.com/auth/callback",
-  "https://weblogs-warner-estonia-yourself.trycloudflare.com/auth/shopify/callback",
-  "https://weblogs-warner-estonia-yourself.trycloudflare.com/api/auth/callback"
+  "https://clinics-editing-population-rack.trycloudflare.com/auth/callback",
+  "https://clinics-editing-population-rack.trycloudflare.com/auth/shopify/callback",
+  "https://clinics-editing-population-rack.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
