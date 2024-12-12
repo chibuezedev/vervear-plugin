@@ -86,6 +86,7 @@ export default function Index() {
         const data = await response.json();
         console.log("Store Products", data);
         setProduct(data.product);
+        setViewerUrl(data?.product?.viewerUrl)
         setLoading(false)
       } catch (error) {
         setLoading(false)
